@@ -39,7 +39,7 @@ class YZPower(Article):
 			}))
 
 	def more(self, Query):
-		print(get(botdata.BASE_URL + 'editMessagecaption?caption=' +
+		get(botdata.BASE_URL + 'editMessagecaption?caption=' +
 			'YZРоwеr зарядка LiFеРО4\n' +
 			'___________________________\n' +
 			'\n' +
@@ -62,10 +62,10 @@ class YZPower(Article):
 				}) +
 			'&chat_id=' + str(Query['callback_query']['message']['chat']['id']) +
 			'&message_id=' + str(Query['callback_query']['message']['message_id'])
-		).json())
+		)
 
 	def stock(self, Query):
-		print(get(botdata.BASE_URL + 'editMessagecaption?caption=' +
+		get(botdata.BASE_URL + 'editMessagecaption?caption=' +
 			'YZРоwеr зарядка LiFеРО4\n' +
 			'___________________________\n' +
 			'\n' +
@@ -90,10 +90,10 @@ class YZPower(Article):
 				}) +
 			'&chat_id=' + str(Query['callback_query']['message']['chat']['id']) +
 			'&message_id=' + str(Query['callback_query']['message']['message_id'])
-		).json())
+		)
 
 	def spec(self, Query):
-		print(get(botdata.BASE_URL + 'editMessagecaption?caption=' +
+		get(botdata.BASE_URL + 'editMessagecaption?caption=' +
 			'YZРоwеr зарядка LiFеРО4\n' +
 			'___________________________\n' +
 			'\n' +
@@ -120,4 +120,4 @@ class YZPower(Article):
 				}) +
 			'&chat_id=' + str(Query['callback_query']['message']['chat']['id']) +
 			'&message_id=' + str(Query['callback_query']['message']['message_id'])
-		).json())
+		)
