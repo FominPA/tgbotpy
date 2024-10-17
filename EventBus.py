@@ -1,9 +1,7 @@
 from requests import get
 from sets import botdata
 import buttons
-from Articles.LifePO4 import LifePO4
-from Articles.YZPower import YZPower
-from Articles.BMSDaly import BMSDaly
+import Catalog
 
 class EventBus:
 	def __init__ (self, Query):
@@ -13,9 +11,7 @@ class EventBus:
 				return
 
 			if Query['message']['text'] == 'Каталог':
-				LifePO4(Query)
-				BMSDaly(Query)
-				YZPower(Query)
+				Catalog()
 				return
 
 			if Query['message']['text'] == 'Контакт продавца':
@@ -26,9 +22,7 @@ class EventBus:
 				self.remove_keyboard(Query['message']['from']['id'])
 				return
 		elif 'callback_query' in Query:
-			LifePO4(Query)
-			BMSDaly(Query)
-			YZPower(Query)
+			Catalog()
 
 
 	def send_general_menu(self, UserID):
