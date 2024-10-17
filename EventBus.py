@@ -1,9 +1,9 @@
 from requests import get
-import botdata
+from sets import botdata
 import buttons
-from LifePO4 import LifePO4
-from YZPower import YZPower
-from BMSDaly import BMSDaly
+from Articles.LifePO4 import LifePO4
+from Articles.YZPower import YZPower
+from Articles.BMSDaly import BMSDaly
 
 class EventBus:
 	def __init__ (self, Query):
@@ -14,8 +14,8 @@ class EventBus:
 
 			if Query['message']['text'] == 'Каталог':
 				LifePO4(Query)
-				YZPower(Query)
 				BMSDaly(Query)
+				YZPower(Query)
 				return
 
 			if Query['message']['text'] == 'Контакт продавца':

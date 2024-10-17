@@ -1,8 +1,8 @@
 from requests import get
 from time import sleep
 from os import system
-import botdata
-from serverdata import con
+from sets import botdata
+from sets.serverdata import con
 from EventBus import EventBus
 
 def load_last_update_id():

@@ -1,6 +1,6 @@
 from requests import get
 import json
-import botdata
+from sets import botdata
 
 class LifePO4:
 	ucode = '1285649'

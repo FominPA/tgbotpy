@@ -1,6 +1,6 @@
 from requests import get
 import json
-import botdata
+from sets import botdata
 
 class YZPower:
 	ucode = '1285650'

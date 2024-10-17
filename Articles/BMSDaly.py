@@ -1,6 +1,6 @@
 from requests import get
 import json
-import botdata
+from sets import botdata
 
 class BMSDaly:
 	ucode = '1285651'

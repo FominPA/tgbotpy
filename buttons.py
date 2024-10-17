@@ -1,6 +1,6 @@
 from time import sleep
 from requests import get
-import botdata
+from sets import botdata
 import json
 
 def send_markup(UserID, Markup): return get(botdata.BASE_URL + 'sendMessage?chat_id=' + str(UserID) + '&text=keyboard updated&reply_markup=' + json.dumps(Markup)).json()
