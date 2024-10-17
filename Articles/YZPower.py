@@ -1,19 +1,20 @@
 from requests import get
 import json
 from sets import botdata
+from Articles.Article import Article
 
-class YZPower:
+class YZPower(Article):
 	ucode = '1285650'
 
 	def __init__ (self, Query):
 		if 'message' in Query:
 			if Query['message']['text'] == 'Каталог':
-				self.send(Query)
+				super().send(Query, self.get_photo(), self.get_general_text())
 				return
 		elif 'callback_query' in Query:
 			if self.ucode in Query['callback_query']['data']:
 				if 'general' in Query['callback_query']['data']:
-					self.back_to_general(Query)
+					super().back_to_general(Query, self.get_general_text())
 					return
 				if 'more' in Query['callback_query']['data']:
 					self.more(Query)
@@ -36,18 +37,6 @@ class YZPower:
 				'inline_keyboard': 
 					[[{'text': 'Подробнее', 'callback_data': self.ucode + 'more'},],]
 			}))
-
-	def send(self, Query):
-		get(botdata.BASE_URL + 'sendphoto?chat_id=' + botdata.MY_ID + 
-			'&photo=' + self.get_photo() + self.get_general_text()
-		)
-
-	def back_to_general(self, Query):
-		get(botdata.BASE_URL + 'editMessagecaption?' +
-			self.get_general_text() +
-			'&chat_id=' + str(Query['callback_query']['message']['chat']['id']) +
-			'&message_id=' + str(Query['callback_query']['message']['message_id'])
-		)
 
 	def more(self, Query):
 		print(get(botdata.BASE_URL + 'editMessagecaption?caption=' +

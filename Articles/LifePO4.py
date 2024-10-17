@@ -1,18 +1,21 @@
 from requests import get
 import json
 from sets import botdata
+from Articles.Article import Article
 
-class LifePO4:
+class LifePO4(Article):
 	ucode = '1285649'
+
 	def __init__ (self, Query):
 		if 'message' in Query:
 			if Query['message']['text'] == 'Каталог':
-				self.send(Query)
+				super().send(Query, self.get_photo(), self.get_general_text())
 				return
 		elif 'callback_query' in Query:
 			if self.ucode in Query['callback_query']['data']:
 				if 'general' in Query['callback_query']['data']:
-					self.back_to_general(Query)
+					super().back_to_general(Query, self.get_general_text())
+					return
 					return
 				if 'feature' in Query['callback_query']['data']:
 					self.feature(Query)
@@ -38,7 +41,7 @@ class LifePO4:
 			}))
 
 	def send(self, Query):
-		get(botdata.BASE_URL + 'sendphoto?chat_id=' + botdata.MY_ID + 
+		get(botdata.BASE_URL + 'sendphoto?chat_id=' + str(Query['message']['chat']['id']) + 
 			'&photo=' + self.get_photo() + self.get_general_text()
 		)
 
