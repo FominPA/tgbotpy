@@ -1,7 +1,7 @@
 from requests import get
 from sets import botdata
 import buttons
-import Catalog
+from Catalog import Catalog
 
 class EventBus:
 	def __init__ (self, Query):
@@ -11,7 +11,7 @@ class EventBus:
 				return
 
 			if Query['message']['text'] == 'Каталог':
-				Catalog()
+				Catalog(Query)
 				return
 
 			if Query['message']['text'] == 'Контакт продавца':
@@ -22,7 +22,7 @@ class EventBus:
 				self.remove_keyboard(Query['message']['from']['id'])
 				return
 		elif 'callback_query' in Query:
-			Catalog()
+			Catalog(Query)
 
 
 	def send_general_menu(self, UserID):
