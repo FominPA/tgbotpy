@@ -1,31 +1,27 @@
-from requests import get
+import asyncio, aiohttp
 from sets import botdata
 import buttons
 from Catalog import Catalog
 
 class EventBus:
-	def __init__ (self, Query):
+	async def init (self, Query):
 		if 'message' in Query:
 			if Query['message']['text'] == '/start':
-				self.send_general_menu(Query['message']['from']['id'])
-				return
+				await self.send_general_menu(Query['message']['from']['id'])
 
 			if Query['message']['text'] == 'Каталог':
-				Catalog(Query)
-				return
+				await Catalog.init(None, Query)
 
 			if Query['message']['text'] == 'Контакт продавца':
-				get(botdata.BASE_URL + 'sendcontact?chat_id=' + str(Query['message']['from']['id']) + '&first_name=Никита&last_name=Гифрин&phone_number=79257393984')
-				return
+				await self.send_contact(Query)
 
 			if Query['message']['text'] == 'Закрыть клавиатуру':
-				self.remove_keyboard(Query['message']['from']['id'])
-				return
+				await self.remove_keyboard(Query['message']['from']['id'])
 		elif 'callback_query' in Query:
-			Catalog(Query)
+			await Catalog.init(None, Query)
 
 
-	def send_general_menu(self, UserID):
+	async def send_general_menu(self, UserID):
 		Markup = {
 			'keyboard': [
 				[{'text': 'Каталог'},],
@@ -35,6 +31,10 @@ class EventBus:
 			'resize_keyboard': True
 		}
 
-		buttons.send_markup(UserID, Markup)
+		await buttons.send_markup(UserID, Markup)
 
-	def remove_keyboard(self, UserID): buttons.remove_keyboard(UserID)
+	async def remove_keyboard(self, UserID): return buttons.remove_keyboard(UserID)
+
+	async def send_contact(self, Query):
+		async with aiohttp.ClientSession() as session:
+			await session.get(botdata.BASE_URL + 'sendcontact?chat_id=' + str(Query['message']['from']['id']) + '&first_name=Никита&last_name=Гифрин&phone_number=79257393984')

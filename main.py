@@ -1,49 +1,20 @@
-from requests import get
-from time import time, sleep
-from os import system
-from sets import botdata
+from Listener import Listener
 from sets.serverdata import con
-from EventBus import EventBus
+from sets import botdata
+import Articles.Article
+import buttons
+import asyncio, aiohttp
 
-def load_last_update_id():
-	try:
-		with con.cursor() as cursor:
-			cursor.execute('SELECT `id` FROM `update_id_log` ORDER BY `date` DESC LIMIT 1;')
-			return cursor.fetchall()[0][0]
+Listener(con)
 
-	except Exception as ex:
-		print('func load_last_update_id return error:', str(ex))
-
-def save_last_update_id(update_id):
-	try:
-		with con.cursor() as cursor:
-			cursor.execute('INSERT INTO `update_id_log` (id, date) VALUES (' + str(update_id) + ', default);')
-			# cursor.fetchall()
-
-	except Exception as ex:
-		print('func save_last_update_id return error:', str(ex))
-
-def get_updates(): return get(botdata.BASE_URL + 'getupdates').json()
-
-async def run_eventbus(Query):
-	await EventBus(Query)
-
-last_id = load_last_update_id()
-while True:
-	for i in range(20):
-		query = get_updates()['result']
-		tstart = time()
-		if query[-1]['update_id'] > last_id:
-			
-			i = 1
-			while query[-i]['update_id'] > last_id:
-				EventBus(query[-i])
-				# run usersdb
-				i -= 1
-			last_id = query[-1]['update_id']
-			save_last_update_id(last_id)
-		print(query[-1]['update_id'])
-		tfinish = time() - tstart
-		if tfinish < 0.5:
-			sleep(0.5 - tfinish)
-	system('cls')
+# Запускаем слушатель
+# 	Слушает запросы до тех пор пока не появится новая пачка
+# 	Отделяет пачку
+# 	Передает ёё парсеру
+# 		...
+# 		Принимает пачку запросов
+# 		Разделяет их на пользователей
+# 		Для каждого пользователя запускает последовательный поток
+# 		А мог бы для каждого пользователя создавать поток и запускать его
+# 		...
+# 	Запоминает id последнего нового запроса
