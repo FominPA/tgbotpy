@@ -1,10 +1,5 @@
 from Listener import Listener
 from sets.serverdata import con
-from sets import botdata
-import Articles.Article
-import buttons
-import asyncio, aiohttp
-
 Listener(con)
 
 # Запускаем слушатель

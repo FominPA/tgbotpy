@@ -33,7 +33,7 @@ class EventBus:
 
 		await buttons.send_markup(UserID, Markup)
 
-	async def remove_keyboard(self, UserID): return buttons.remove_keyboard(UserID)
+	async def remove_keyboard(self, UserID): await buttons.remove_keyboard(UserID)
 
 	async def send_contact(self, Query):
 		async with aiohttp.ClientSession() as session:
