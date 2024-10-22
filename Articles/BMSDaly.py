@@ -12,6 +12,8 @@ class BMSDaly(Article):
 			if Query['message']['text'] == 'Каталог':
 				await super().send(Query, self.get_photo(), self.get_general_text())
 		elif 'callback_query' in Query:
+			if 'Каталог' in Query['callback_query']['data']:
+				await super().send(Query, self.get_photo(), self.get_general_text())
 			if self.ucode in Query['callback_query']['data']:
 				if 'general' in Query['callback_query']['data']:
 					await super().back_to_general(Query, self.get_general_text())

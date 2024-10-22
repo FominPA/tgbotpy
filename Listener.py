@@ -14,17 +14,14 @@ class Listener:
 			for _ in range(20):
 				queries = self.get_updates()['result']
 				tstart = time()
-				if not queries:
-					try:
-						if queries[-1]['update_id'] > last_id:
-							unproc = self.select_unproc_queries(queries, last_id)
-							EventParser(unproc)
-							last_id = queries[-1]['update_id']
-							self.save_last_update_id(sql_con, last_id)
-					except:
-						pass
+				if bool(queries):
+					if queries[-1]['update_id'] > last_id:
+						print('more')
+						unproc = self.select_unproc_queries(queries, last_id)
+						EventParser(unproc)
+						last_id = queries[-1]['update_id']
+						self.save_last_update_id(sql_con, last_id)
 
-				# print(queries[-1]['update_id'])
 				print(last_id)
 				tfinish = time() - tstart
 				if tfinish < 0.5:

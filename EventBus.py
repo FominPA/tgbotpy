@@ -2,12 +2,14 @@ import asyncio, aiohttp
 from sets import botdata
 import buttons
 from Catalog import Catalog
+from menu.menu import Menu
 
 class EventBus:
 	async def init (self, Query):
 		if 'message' in Query:
 			if Query['message']['text'] == '/start':
-				await self.send_general_menu(Query['message']['from']['id'])
+				# await self.send_general_menu(Query['message']['from']['id'])
+				await Menu.async_init(None)
 
 			if Query['message']['text'] == 'Каталог':
 				await Catalog.init(None, Query)
@@ -18,7 +20,8 @@ class EventBus:
 			if Query['message']['text'] == 'Закрыть клавиатуру':
 				await self.remove_keyboard(Query['message']['from']['id'])
 		elif 'callback_query' in Query:
-			await Catalog.init(None, Query)
+			if Query['callback_query']['data'] == 'Каталог':
+				await Catalog.init(None, Query)
 
 
 	async def send_general_menu(self, UserID):

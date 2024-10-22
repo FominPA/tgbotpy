@@ -1,5 +1,6 @@
 from Listener import Listener
 from sets.serverdata import con
+
 Listener(con)
 
 # Запускаем слушатель

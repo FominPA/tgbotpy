@@ -2,9 +2,11 @@ import asyncio, aiohttp
 from sets import botdata
 import json
 
-async def send_markup(UserID, Markup):
+async def send_markup(UserID, Markup, text = 'keyboard updated'):
 	async with aiohttp.ClientSession() as session:
-		await session.get(botdata.BASE_URL + 'sendMessage?chat_id=' + str(UserID) + '&text=keyboard updated&reply_markup=' + json.dumps(Markup))
+		await session.get(botdata.BASE_URL + 'sendMessage?chat_id=' + str(UserID) + 
+			"&text=" + str(text) + '&parse_mode=html' +
+			"&reply_markup=" + json.dumps(Markup))
 
 async def remove_keyboard(UserID):
 	Markup = { 'remove_keyboard': True }
