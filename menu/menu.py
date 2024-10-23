@@ -4,9 +4,10 @@ from sets import botdata
 
 class Menu:
 
-	async def async_init(self):
+	async def async_init(self, UserID):
 		Markup = {'inline_keyboard': [
-			[ { 'text': 'Каталог', 'callback_data': 'Каталог' } ]
+			[ { 'text': 'Каталог', 'callback_data': 'Каталог' } ],
+			[ { 'text': 'Сделать заказ', 'callback_data': 'order' } ],
 		]}
 
-		await buttons.send_markup(botdata.MY_ID, Markup, 'Меню:')
+		await buttons.send_markup(UserID, Markup, 'Меню:')

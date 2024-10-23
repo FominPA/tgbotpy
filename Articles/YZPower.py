@@ -33,7 +33,7 @@ class YZPower(Article):
 			'&reply_markup=' +
 			json.dumps({
 				'inline_keyboard': 
-					[[{'text': 'Подробнее', 'callback_data': self.ucode + 'more'},],]
+					[[{'text': 'Подробнее', 'callback_data': 'editarticle' + self.ucode + 'more'},],]
 			}))
 
 	async def more(self, Query):
@@ -54,9 +54,9 @@ class YZPower(Article):
 				json.dumps({
 					'inline_keyboard': 
 						[
-							[ {'text': 'Свернуть', 'callback_data': self.ucode + 'general'}, ],
-							[ {'text': 'Технические характеристики', 'callback_data': self.ucode + 'spec'}, ],
-							[ {'text': 'Наличие и цены', 'callback_data': self.ucode + 'stock'}, ],
+							[ {'text': 'Свернуть', 'callback_data': 'editarticle' + self.ucode + 'general'}, ],
+							[ {'text': 'Технические характеристики', 'callback_data': 'editarticle' + self.ucode + 'spec'}, ],
+							[ {'text': 'Наличие и цены', 'callback_data': 'editarticle' + self.ucode + 'stock'}, ],
 						]
 					}) +
 				'&chat_id=' + str(Query['callback_query']['message']['chat']['id']) +
@@ -82,9 +82,9 @@ class YZPower(Article):
 				json.dumps({
 					'inline_keyboard': 
 						[
-							[ {'text': 'Свернуть', 'callback_data': self.ucode + 'general'}, ],
-							[ {'text': 'Подробнее', 'callback_data': self.ucode + 'more'}, ],
-							[ {'text': 'Технические характеристики', 'callback_data': self.ucode + 'spec'}, ],
+							[ {'text': 'Свернуть', 'callback_data': 'editarticle' + self.ucode + 'general'}, ],
+							[ {'text': 'Подробнее', 'callback_data': 'editarticle' + self.ucode + 'more'}, ],
+							[ {'text': 'Технические характеристики', 'callback_data': 'editarticle' + self.ucode + 'spec'}, ],
 						]
 					}) +
 				'&chat_id=' + str(Query['callback_query']['message']['chat']['id']) +
@@ -112,9 +112,9 @@ class YZPower(Article):
 				json.dumps({
 					'inline_keyboard': 
 						[
-							[ {'text': 'Свернуть', 'callback_data': self.ucode + 'general'}, ],
-							[ {'text': 'Подробнее', 'callback_data': self.ucode + 'more'}, ],
-							[ {'text': 'Наличие и цены', 'callback_data': self.ucode + 'stock'}, ],
+							[ {'text': 'Свернуть', 'callback_data': 'editarticle' + self.ucode + 'general'}, ],
+							[ {'text': 'Подробнее', 'callback_data': 'editarticle' + self.ucode + 'more'}, ],
+							[ {'text': 'Наличие и цены', 'callback_data': 'editarticle' + self.ucode + 'stock'}, ],
 						]
 					}) +
 				'&chat_id=' + str(Query['callback_query']['message']['chat']['id']) +

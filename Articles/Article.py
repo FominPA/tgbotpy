@@ -5,7 +5,7 @@ class Article:
 	async def send(self, Query, photo, text):
 		UserID = 0
 		if 'message' in Query:
-			UserID = Query['message']['chat']['id']
+			UserID = Query['message']['from']['id']
 		elif 'callback_query' in Query:
 			UserID = Query['callback_query']['message']['chat']['id']
 		async with aiohttp.ClientSession() as session:

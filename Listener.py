@@ -16,7 +16,6 @@ class Listener:
 				tstart = time()
 				if bool(queries):
 					if queries[-1]['update_id'] > last_id:
-						print('more')
 						unproc = self.select_unproc_queries(queries, last_id)
 						EventParser(unproc)
 						last_id = queries[-1]['update_id']

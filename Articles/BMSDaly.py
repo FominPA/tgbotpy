@@ -44,7 +44,7 @@ class BMSDaly(Article):
 			'&reply_markup=' +
 			json.dumps({
 				'inline_keyboard': 
-					[[{'text': 'Подробнее', 'callback_data': self.ucode + 'more'},],]
+					[[{'text': 'Подробнее', 'callback_data': 'editarticle' + self.ucode + 'more'},],]
 			}))
 
 	async def send(self, Query):
@@ -78,8 +78,8 @@ class BMSDaly(Article):
 				json.dumps({
 					'inline_keyboard': 
 						[
-							[ {'text': 'Свернуть', 'callback_data': self.ucode + 'general'}, ],
-							[ {'text': 'Наличие и цены', 'callback_data': self.ucode + 'stock'}, ],
+							[ {'text': 'Свернуть', 'callback_data': 'editarticle' + self.ucode + 'general'}, ],
+							[ {'text': 'Наличие и цены', 'callback_data': 'editarticle' + self.ucode + 'stock'}, ],
 						]
 					}) +
 				'&chat_id=' + str(Query['callback_query']['message']['chat']['id']) +
@@ -109,14 +109,14 @@ class BMSDaly(Article):
 					'inline_keyboard': 
 						[
 							[ 
-								{'text': '12B', 'callback_data': self.ucode + 'v12'}, 
-								{'text': '24B', 'callback_data': self.ucode + 'v24'}, 
-								{'text': '36B', 'callback_data': self.ucode + 'v36'}, 
-								{'text': '48B', 'callback_data': self.ucode + 'v48'}, 
-								{'text': '60B', 'callback_data': self.ucode + 'v60'}, 
+								{'text': '12B', 'callback_data': 'editarticle' + self.ucode + 'v12'}, 
+								{'text': '24B', 'callback_data': 'editarticle' + self.ucode + 'v24'}, 
+								{'text': '36B', 'callback_data': 'editarticle' + self.ucode + 'v36'}, 
+								{'text': '48B', 'callback_data': 'editarticle' + self.ucode + 'v48'}, 
+								{'text': '60B', 'callback_data': 'editarticle' + self.ucode + 'v60'}, 
 							],
-							[ {'text': 'Свернуть', 'callback_data': self.ucode + 'general'}, ],
-							[ {'text': 'Подробнее', 'callback_data': self.ucode + 'more'}, ],
+							[ {'text': 'Свернуть', 'callback_data': 'editarticle' + self.ucode + 'general'}, ],
+							[ {'text': 'Подробнее', 'callback_data': 'editarticle' + self.ucode + 'more'}, ],
 						]
 					}) +
 				'&chat_id=' + str(Query['callback_query']['message']['chat']['id']) +
@@ -151,13 +151,13 @@ class BMSDaly(Article):
 					'inline_keyboard': 
 						[
 							[ 
-								{'text': '↩', 'callback_data': self.ucode + 'stock'},
-								{'text': '24B', 'callback_data': self.ucode + 'v24'}, 
-								{'text': '36B', 'callback_data': self.ucode + 'v36'}, 
-								{'text': '48B', 'callback_data': self.ucode + 'v48'}, 
-								{'text': '60B', 'callback_data': self.ucode + 'v60'}, 
+								{'text': '↩', 'callback_data': 'editarticle' + self.ucode + 'stock'},
+								{'text': '24B', 'callback_data': 'editarticle' + self.ucode + 'v24'}, 
+								{'text': '36B', 'callback_data': 'editarticle' + self.ucode + 'v36'}, 
+								{'text': '48B', 'callback_data': 'editarticle' + self.ucode + 'v48'}, 
+								{'text': '60B', 'callback_data': 'editarticle' + self.ucode + 'v60'}, 
 							],
-							[ {'text': 'Свернуть', 'callback_data': self.ucode + 'general'}, ],
+							[ {'text': 'Свернуть', 'callback_data': 'editarticle' + self.ucode + 'general'}, ],
 						]
 					}) +
 				'&chat_id=' + str(Query['callback_query']['message']['chat']['id']) +
@@ -195,13 +195,13 @@ class BMSDaly(Article):
 					'inline_keyboard': 
 						[
 							[ 
-								{'text': '↩', 'callback_data': self.ucode + 'stock'},
-								{'text': '12B', 'callback_data': self.ucode + 'v12'}, 
-								{'text': '36B', 'callback_data': self.ucode + 'v36'}, 
-								{'text': '48B', 'callback_data': self.ucode + 'v48'}, 
-								{'text': '60B', 'callback_data': self.ucode + 'v60'}, 
+								{'text': '↩', 'callback_data': 'editarticle' + self.ucode + 'stock'},
+								{'text': '12B', 'callback_data': 'editarticle' + self.ucode + 'v12'}, 
+								{'text': '36B', 'callback_data': 'editarticle' + self.ucode + 'v36'}, 
+								{'text': '48B', 'callback_data': 'editarticle' + self.ucode + 'v48'}, 
+								{'text': '60B', 'callback_data': 'editarticle' + self.ucode + 'v60'}, 
 							],
-							[ {'text': 'Свернуть', 'callback_data': self.ucode + 'general'}, ],
+							[ {'text': 'Свернуть', 'callback_data': 'editarticle' + self.ucode + 'general'}, ],
 						]
 					}) +
 				'&chat_id=' + str(Query['callback_query']['message']['chat']['id']) +
@@ -232,13 +232,13 @@ class BMSDaly(Article):
 					'inline_keyboard': 
 						[
 							[ 
-								{'text': '↩', 'callback_data': self.ucode + 'stock'},
-								{'text': '12B', 'callback_data': self.ucode + 'v12'}, 
-								{'text': '24B', 'callback_data': self.ucode + 'v24'}, 
-								{'text': '48B', 'callback_data': self.ucode + 'v48'}, 
-								{'text': '60B', 'callback_data': self.ucode + 'v60'}, 
+								{'text': '↩', 'callback_data': 'editarticle' + self.ucode + 'stock'},
+								{'text': '12B', 'callback_data': 'editarticle' + self.ucode + 'v12'}, 
+								{'text': '24B', 'callback_data': 'editarticle' + self.ucode + 'v24'}, 
+								{'text': '48B', 'callback_data': 'editarticle' + self.ucode + 'v48'}, 
+								{'text': '60B', 'callback_data': 'editarticle' + self.ucode + 'v60'}, 
 							],
-							[ {'text': 'Свернуть', 'callback_data': self.ucode + 'general'}, ],
+							[ {'text': 'Свернуть', 'callback_data': 'editarticle' + self.ucode + 'general'}, ],
 						]
 					}) +
 				'&chat_id=' + str(Query['callback_query']['message']['chat']['id']) +
@@ -273,13 +273,13 @@ class BMSDaly(Article):
 					'inline_keyboard': 
 						[
 							[ 
-								{'text': '↩', 'callback_data': self.ucode + 'stock'},
-								{'text': '12B', 'callback_data': self.ucode + 'v12'}, 
-								{'text': '24B', 'callback_data': self.ucode + 'v24'}, 
-								{'text': '36B', 'callback_data': self.ucode + 'v36'}, 
-								{'text': '60B', 'callback_data': self.ucode + 'v60'}, 
+								{'text': '↩', 'callback_data': 'editarticle' + self.ucode + 'stock'},
+								{'text': '12B', 'callback_data': 'editarticle' + self.ucode + 'v12'}, 
+								{'text': '24B', 'callback_data': 'editarticle' + self.ucode + 'v24'}, 
+								{'text': '36B', 'callback_data': 'editarticle' + self.ucode + 'v36'}, 
+								{'text': '60B', 'callback_data': 'editarticle' + self.ucode + 'v60'}, 
 							],
-							[ {'text': 'Свернуть', 'callback_data': self.ucode + 'general'}, ],
+							[ {'text': 'Свернуть', 'callback_data': 'editarticle' + self.ucode + 'general'}, ],
 						]
 					}) +
 				'&chat_id=' + str(Query['callback_query']['message']['chat']['id']) +
@@ -314,13 +314,13 @@ class BMSDaly(Article):
 					'inline_keyboard': 
 						[
 							[ 
-								{'text': '↩', 'callback_data': self.ucode + 'stock'},
-								{'text': '12B', 'callback_data': self.ucode + 'v12'}, 
-								{'text': '24B', 'callback_data': self.ucode + 'v24'}, 
-								{'text': '36B', 'callback_data': self.ucode + 'v36'}, 
-								{'text': '48B', 'callback_data': self.ucode + 'v48'}, 
+								{'text': '↩', 'callback_data': 'editarticle' + self.ucode + 'stock'},
+								{'text': '12B', 'callback_data': 'editarticle' + self.ucode + 'v12'}, 
+								{'text': '24B', 'callback_data': 'editarticle' + self.ucode + 'v24'}, 
+								{'text': '36B', 'callback_data': 'editarticle' + self.ucode + 'v36'}, 
+								{'text': '48B', 'callback_data': 'editarticle' + self.ucode + 'v48'}, 
 							],
-							[ {'text': 'Свернуть', 'callback_data': self.ucode + 'general'}, ],
+							[ {'text': 'Свернуть', 'callback_data': 'editarticle' + self.ucode + 'general'}, ],
 						]
 					}) +
 				'&chat_id=' + str(Query['callback_query']['message']['chat']['id']) +

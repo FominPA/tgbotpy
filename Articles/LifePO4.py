@@ -37,7 +37,7 @@ class LifePO4(Article):
 			'&reply_markup=' +
 			json.dumps({
 				'inline_keyboard': 
-					[[{'text': 'Подробнее', 'callback_data': self.ucode + 'feature'},],]
+					[[{'text': 'Подробнее', 'callback_data': 'editarticle' + self.ucode + 'feature'},],]
 			}))
 
 	async def feature(self, Query):
@@ -73,8 +73,8 @@ class LifePO4(Article):
 				json.dumps({
 					'inline_keyboard': 
 						[
-							[ {'text': 'Свернуть', 'callback_data': self.ucode + 'general'}, ],
-							[ {'text': 'Технические Характеристики', 'callback_data': self.ucode + 'spec'}, ],
+							[ {'text': 'Свернуть', 'callback_data': 'editarticle' + self.ucode + 'general'}, ],
+							[ {'text': 'Технические Характеристики', 'callback_data': 'editarticle' + self.ucode + 'spec'}, ],
 						]
 					}) +
 				'&chat_id=' + str(Query['callback_query']['message']['chat']['id']) +
@@ -99,8 +99,8 @@ class LifePO4(Article):
 				json.dumps({
 					'inline_keyboard': 
 						[
-							[ {'text': 'Свернуть', 'callback_data': self.ucode + 'general'}, ],
-							[ {'text': 'Подробнее', 'callback_data': self.ucode + 'feature'}, ],
+							[ {'text': 'Свернуть', 'callback_data': 'editarticle' + self.ucode + 'general'}, ],
+							[ {'text': 'Подробнее', 'callback_data': 'editarticle' + self.ucode + 'feature'}, ],
 						]
 					}) +
 				'&chat_id=' + str(Query['callback_query']['message']['chat']['id']) +
