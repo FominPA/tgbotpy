@@ -2,22 +2,25 @@ from requests import get
 from time import time, sleep
 from os import system
 from sets import botdata
-from EventBus import EventBus
 from EventParser import EventParser
 
 class Listener:
-	def __init__(self, sql_con, last_id = 0):
-		if last_id == 0:
-			last_id = self.load_last_update_id(sql_con)
+
+	def __init__(self, sql_con, last_id = False):
+
+		if not last_id: last_id = self.load_last_update_id(sql_con)
 
 		while True:
 			for _ in range(20):
-				queries = self.get_updates()['result']
 				tstart = time()
-				if bool(queries):
+
+				queries = self.get_updates()['result']
+				if queries:
 					if queries[-1]['update_id'] > last_id:
-						unproc = self.select_unproc_queries(queries, last_id)
-						EventParser(unproc)
+
+						unproc = self.select_unproc_queries(queries, last_id) # return list
+						EventParser(unproc) # parsing queries of each user and proceed inside
+
 						last_id = queries[-1]['update_id']
 						self.save_last_update_id(sql_con, last_id)
 
@@ -26,6 +29,8 @@ class Listener:
 				if tfinish < 0.5:
 					sleep(0.5 - tfinish)
 			system('cls')
+
+	###########################################################################
 
 	def load_last_update_id(self, sql_con):
 		try:
@@ -39,15 +44,15 @@ class Listener:
 	def save_last_update_id(self, sql_con, update_id):
 		try:
 			with sql_con.cursor() as cursor:
-				cursor.execute('INSERT INTO `update_id_log` (id, date) VALUES (' + str(update_id) + ', default);')
-				# cursor.fetchall()
+				cursor.execute('INSERT INTO `update_id_log` (id, date) ' + 
+				'VALUES (' + str(update_id) + ', default);')
 
 		except Exception as ex:
 			print('func save_last_update_id return error:', str(ex))
 
 	def get_updates(self): return get(botdata.BASE_URL + 'getupdates').json()
 
-	def select_unproc_queries(self, queries: list, last_id: int):
+	def select_unproc_queries(self, queries: list, last_id: int) -> list:
 
 		unproc = []
 		i = -1

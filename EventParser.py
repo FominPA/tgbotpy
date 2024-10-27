@@ -8,8 +8,8 @@ import asyncio, aiohttp
 
 class EventParser:
 	def __init__ (self, queries: list) -> None:
-		UD = self.split_users(queries)
-		asyncio.run(self.run_users_streams(UD))
+		UsersDict = self.split_users(queries)
+		asyncio.run(self.run_users_streams(UsersDict))
 
 	def split_users(self, queries: list) -> 'Dict of lists':
 		users_dict = {}

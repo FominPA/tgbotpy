@@ -4,7 +4,7 @@ from sets import botdata
 
 class Menu:
 
-	async def async_init(self, UserID):
+	async def init(self, UserID):
 		Markup = {'inline_keyboard': [
 			[ { 'text': 'Каталог', 'callback_data': 'Каталог' } ],
 			[ { 'text': 'Сделать заказ', 'callback_data': 'order' } ],
