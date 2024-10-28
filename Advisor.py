@@ -28,28 +28,23 @@ class Advisor:
 		if 'message' in Query:
 			if 'is_topic_message' in Query['message']:
 				await self.answer_from_topic(Query)
-				return
-			if Query['message']['text'] == 'Закончить диалог':
-				await self.set_default_state(UserID = Query['message']['chat']['id'])
-				await self.close_topic(UserID = Query['message']['chat']['id'])
-				await Menu().init(UserID = Query['message']['chat']['id'])
-				return
 			else:
 				await self.question_to_topic(Query)
-				return
+			return
 		if 'callback_query' in Query:
-			UserID = Query['callback_query']['message']['chat']['id']
-			if Query['callback_query']['data'] == 'order':
-				fetchall = await UsersDB().init(UserID)
-				if fetchall:
-					if fetchall[0][1] == 'advisor':
-						return None
-				await OpenAdvice().init(UserID)
-				return
-			if Query['callback_query']['data'] == 'closeadvise':
-				await self.set_default_state(UserID)
-				await self.close_topic(UserID)
-				return
+			if 'private' in Query['callback_query']['message']['chat']['type']:
+				UserID = Query['callback_query']['message']['chat']['id']
+				if Query['callback_query']['data'] == 'order':
+					UserData = UsersDB()
+					await UserData.init()
+					if UserData.is_advisee(): return
+					await OpenAdvice().init(UserID)
+					return
+				if Query['callback_query']['data'] == 'closeadvise':
+					await self.set_default_state(UserID)
+					await self.close_topic(UserID)
+					await Menu().init(Query['callback_query']['from']['id'])
+					return
 
 	###############################################################################
 
@@ -73,12 +68,18 @@ class Advisor:
 		if fetchall: return fetchall[0][0]
 
 	async def answer_from_topic(self, Query):
+		import json
 		UserID = await self.get_user_id(Query['message']['message_thread_id'])
 		if UserID: 
-			async with aiohttp.ClientSession() as session:
-				await session.get(botdata.BASE_URL + 'copyMessage?chat_id=' + str(UserID) + 
-				'&from_chat_id=' + botdata.FORUM_ID +
-				'&message_id=' + str(Query['message']['message_id']))
+			if self.is_advisor(UserID):
+				async with aiohttp.ClientSession() as session:
+					Markup = { 'inline_keyboard': [
+						[ {'text': 'Закончить обращение', 'callback_data': 'closeadvise' } ]
+					] }
+					await session.get(botdata.BASE_URL + 'copyMessage?chat_id=' + str(UserID) + 
+					'&from_chat_id=' + botdata.FORUM_ID +
+					'&message_id=' + str(Query['message']['message_id']) + 
+					'&reply_markup=' + json.dumps(Markup))
 
 	async def get_topic_id(self, UserID) -> 'is have ? TopicID : None':
 		sql = 'SELECT topic FROM BotUsers WHERE user_id=' + str(UserID) + ';'
