@@ -40,7 +40,7 @@ class EventBus:
 				###################### private message state ######################
 
 				UserData = UsersDB()
-				await UserData.init()
+				await UserData.init(UserID)
 
 				from MessageCounter import MessageCounter
 				if not UserData.message_counter_setted(): 

@@ -65,7 +65,7 @@ class OpenAdvice:
 		'Задайте ваш вопрос, и продавец на него ответят')
 
 		async with aiohttp.ClientSession() as session:
-		await session.get(botdata.BASE_URL + 'sendMessage?chat_id=' + str(UserID) + 
+			await session.get(botdata.BASE_URL + 'sendMessage?chat_id=' + str(UserID) + 
 			"&text=" + str(text) + '&parse_mode=html')
 
 	async def reopen_advice(self, TopicID):

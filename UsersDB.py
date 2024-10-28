@@ -11,10 +11,10 @@ class UsersDB:
 	###############################################################################
 
 	async def init(self, UserID):
-		concrete_user = await self.get_user_all(UserID)
-		if not concrete_user:
+		await self.get_user_all(UserID)
+		if not self.concrete_user:
 			await self.new_user(UserID)
-		return concrete_user
+		return self.concrete_user
 
 	###############################################################################
 
@@ -28,9 +28,9 @@ class UsersDB:
 
 	async def get_user_all(self, UserID) -> 'list in list':
 		sql = 'SELECT * FROM `BotUsers` WHERE user_id=' + str(UserID) + ';'
-		concrete_user = await aconexe(sql)
-		if concrete_user:
-			concrete_user =  self.parse_user_info(concrete_user)
+		self.concrete_user = await aconexe(sql)
+		if self.concrete_user:
+			self.concrete_user = self.parse_user_info(self.concrete_user)
 
 	def parse_user_info(self, fetchall: 'list in list'):
 		fetchall = fetchall[0]
@@ -42,13 +42,13 @@ class UsersDB:
 		}
 
 	def message_counter_setted(self):
-		if concrete_user:
-			if concrete_user['message_counter']: 
+		if self.concrete_user:
+			if self.concrete_user['message_counter']: 
 				return True
 		return False
 
 	def is_advisee(self):
-		if concrete_user:
-			if concrete_user['appstate'] == 'advisor': 
+		if self.concrete_user:
+			if self.concrete_user['appstate'] == 'advisor': 
 				return True
 		return False

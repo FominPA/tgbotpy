@@ -36,14 +36,14 @@ class Advisor:
 				UserID = Query['callback_query']['message']['chat']['id']
 				if Query['callback_query']['data'] == 'order':
 					UserData = UsersDB()
-					await UserData.init()
+					await UserData.init(UserID)
 					if UserData.is_advisee(): return
 					await OpenAdvice().init(UserID)
 					return
 				if Query['callback_query']['data'] == 'closeadvise':
 					await self.set_default_state(UserID)
 					await self.close_topic(UserID)
-					await Menu().init(Query['callback_query']['from']['id'])
+					await Menu().init(UserID)
 					return
 
 	###############################################################################
